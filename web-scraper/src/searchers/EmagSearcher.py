@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-from models.Product import Product
-from scrapers.EmagScraper import EmagScraper
+from models import Product
+from scrapers import EmagScraper
 from urllib.parse import quote
 
 import requests

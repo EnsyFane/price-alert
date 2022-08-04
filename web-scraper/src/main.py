@@ -1,6 +1,8 @@
-from searchers.EmagSearcher import EmagSearcher
-from scrapers.EmagScraper import EmagScraper
+from repos import ProductRepo
+from searchers import EmagSearcher
+from scrapers import EmagScraper
 
+repo = ProductRepo()
 emag_scraper = EmagScraper()
 emag_searcher = EmagSearcher()
 
@@ -8,6 +10,12 @@ emag_searcher = EmagSearcher()
 raw_query = 'hdd extern 1tb'
 
 products = emag_searcher.search(raw_query)
+result = repo.addProduct(products[0])
+if result:
+    print('Product added successfully!')
+else:
+    print('Product with hash already exists!')
 
-# product = emagScraper.scrape(
-#     'hdd-extern-wd-elements-portable-1tb-2-5-usb-3-0-negru-wdbuzg0010bbk/pd/D2JCXBBBM/?path=hdd-extern-wd-elements-portable-1tb-2-5-usb-3-0-negru-wdbuzg0010bbk/pd/D2JCXBBBM')
+print(repo.getProductsWithName('Hdd')[0])
+
+repo.getProductById(0)

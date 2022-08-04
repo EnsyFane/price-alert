@@ -1,6 +1,7 @@
 .vscode/
 venv/
 **/__pycache__/
+**/data/
 
 .python-version
 

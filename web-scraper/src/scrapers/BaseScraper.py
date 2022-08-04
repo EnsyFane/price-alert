@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from models.Product import Product
+from models import Product
 import requests
 
 

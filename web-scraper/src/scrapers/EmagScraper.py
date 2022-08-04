@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-from scrapers.BaseScraper import BaseScraper
-from models.Product import Product
+from scrapers import BaseScraper
+from models import Product
 
 
 class EmagScraper(BaseScraper):
@@ -38,7 +38,7 @@ class EmagScraper(BaseScraper):
 
         full_name = name_soup.text.strip()
         full_price = price_soup.text.strip()
-        price = full_price.split(' ')[0]
+        price = float(full_price.split(' ')[0].replace(',', '.'))
         currency = full_price.split(' ')[1]
         image = image_soup.get('src').strip()
 
