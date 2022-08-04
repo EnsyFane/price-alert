@@ -11,10 +11,6 @@ if ( !(Test-Path $HOME\\.pyenv) ) {
 }
 
 Write-Host "Configuring environment"
-[System.Environment]::SetEnvironmentVariable("PYENV", $env:USERPROFILE + "\.pyenv\pyenv-win\", "Process")
-[System.Environment]::SetEnvironmentVariable("PYENV_HOME", $env:USERPROFILE + "\.pyenv\pyenv-win\", "Process")
-$processEnv = [System.Environment]::GetEnvironmentVariable('Path', "Process")
-[System.Environment]::SetEnvironmentVariable('Path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + $processEnv, "Process")
 
 if ( !(Test-Path .\.python-version) ) {
     Write-Host "Installing Python version: Python $pythonVersion"
@@ -22,17 +18,13 @@ if ( !(Test-Path .\.python-version) ) {
     pyenv install $pythonVersion
 
     Write-Host "Switching Python version: Python $pythonVersion"
-    pyenv local $pythonVersion # Set as version of Python to be used within this folder
-    pyenv rehash # Run after switching versions
+    pyenv local $pythonVersion
+    pyenv rehash
 }
 
-
-$venvVersion = python --version
-Write-Host "Setting up virtual environment using: $venvVersion"
+$venvPyVersion = python --version
+Write-Host "Setting up virtual environment using: $venvPyVersion"
 
 Write-Host "No existing environment found. Creating a new one under '.\venv'"
 python -m pip install --user virtualenv
 python -m venv venv
-
-Write-Host "Resetting environment"
-[System.Environment]::SetEnvironmentVariable('Path', $processEnv, "Process")
